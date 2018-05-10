@@ -69,7 +69,7 @@ void setup() {
 
 void loop() {
   httpServer.handleClient();
-  if (millis()-times>1800000){
+  if (millis()-times>300000){
     times=millis();
     WiFiClient client;
     if (!client.connect(host, httpPort)) 
@@ -82,6 +82,6 @@ void loop() {
     BME280::PresUnit presUnit(BME280::PresUnit_Pa);
     bme.read(pres, temp, hum, tempUnit, presUnit);
     client.print(String("GET /insert_param.php?temp=")+temp+"&hum="+hum+"&pres="+pres+" HTTP/1.1\r\nHost: "+host+"\r\nConnection: close\r\n\r\n");
-    client.stop();                                      // Закрытие соединения
+    client.stop();// Close connect
   }
 }
