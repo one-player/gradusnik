@@ -26,7 +26,7 @@ float temp_tmp;
 float hum_tmp;
 float pres_tmp;
 
-unsigned long time;
+unsigned long times;
 
 BME280I2C bme;
 ESP8266WebServer httpServer(80);
@@ -69,7 +69,9 @@ void setup() {
 
 void loop() {
   httpServer.handleClient();
-  WiFiClient client;
+  if (millis()-times>1800000){
+    times=millis();
+    WiFiClient client;
     if (!client.connect(host, httpPort)) 
       {
         Serial.println("connection failed");
@@ -81,4 +83,5 @@ void loop() {
     bme.read(pres, temp, hum, tempUnit, presUnit);
     client.print(String("GET /insert_param.php?temp=")+temp+"&hum="+hum+"&pres="+pres+" HTTP/1.1\r\nHost: "+host+"\r\nConnection: close\r\n\r\n");
     client.stop();                                      // Закрытие соединения
+  }
 }
