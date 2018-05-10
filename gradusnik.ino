@@ -16,8 +16,8 @@ SCK (Serial Clock)  ->  A5/GPIO-2 on Uno/Pro-Mini, 21 on Mega2560/Due, 3 Leonard
 #include <ESP8266HTTPUpdateServer.h>
 
 /*WiFi prop.*/
-const char* ssid = "Kraken";
-const char* password = "kfgrfkfgrf1987";
+const char* ssid = "123";
+const char* password = "k7";
 const int httpPort = 80;
 /*WiFi prop.*/
 
